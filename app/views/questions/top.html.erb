@@ -1,23 +1,53 @@
 <%= stylesheet_link_tag "top.css" %>
 
-<div class="context">
+<div id="splash-screen">
     <h1>Code Start</h1>
-
-    <%= link_to "ログイン", new_user_session_path, class: "login-link" %>
-    <%= link_to "新規登録", new_user_registration_path, class: "signup-link" %>
 </div>
-    
-<div class="area" >
-        <ul class="circles">
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+
+<div id="main-content" class="hidden">
+    <div class="btn-area">
+        <%= link_to "ログイン", new_user_session_path, class: "login-link" %>
+        <%= link_to "新規登録", new_user_registration_path, class: "signup-link" %>
+    </div>
+
+    <div class="area" >
+    <ul class="circles">
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
 </div >
+</div>
+
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    setTimeout(function() {
+        const splashScreenText = document.querySelector("#splash-screen h1");
+        splashScreenText.style.opacity = 0;
+
+        setTimeout(function() {
+            const splashScreen = document.getElementById("splash-screen");
+            splashScreen.style.display = "none";
+
+            const mainContent = document.getElementById("main-content");
+            mainContent.classList.remove("hidden");
+            mainContent.style.opacity = 1;
+
+            // 3秒後に visible クラスを追加して、トランジションを実行
+            setTimeout(function() {
+                document.querySelector(".login-link").classList.add("visible");
+                document.querySelector(".signup-link").classList.add("visible");
+            }, 600); // ボタンのフェードインをさらに3秒後に遅延させる
+        }, 3000);
+    }, 3000);
+});
+</script>
